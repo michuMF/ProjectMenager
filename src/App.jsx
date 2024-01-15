@@ -10,32 +10,8 @@ function App() {
 		projects: [],
 		tasks: [],
 	})
-
-	function handleAddTask(text) {
-		setProjectState(prev => {
-			const taskId = Math.random()
-			const newTask = {
-				text: text,
-				projectId: prev.selectedProjectId,
-				id: taskId,
-			}
-			return {
-				...prev,
-
-				tasks: [newTask, ...prev.tasks],
-			}
-		})
-	}
-
-	function handleDeleteTask(id) {
-		setProjectState(prev => ({
-			...prev,
-
-			tasks: prev.tasks.filter(task => task.id !== id),
-		}))
-	}
-
 	function handleSelectionProject(id) {
+		console.log(id)
 		setProjectState(prev => ({
 			...prev,
 			selectedProjectId: id,
@@ -43,12 +19,14 @@ function App() {
 	}
 
 	function handleStartAddProject() {
+		console.log("start")
 		setProjectState(prev => ({
 			...prev,
 			selectedProjectId: null,
 		}))
 	}
 	function handleCancelAddProject() {
+		console.log("cancel")
 		setProjectState(prev => ({
 			...prev,
 			selectedProjectId: undefined,
@@ -73,6 +51,29 @@ function App() {
 			projects: prev.projects.filter(
 				project => project.id !== prev.selectedProjectId
 			),
+		}))
+	}
+	function handleAddTask(text) {
+		setProjectState(prev => {
+			const taskId = Math.random()
+			const newTask = {
+				text: text,
+				projectId: prev.selectedProjectId,
+				id: taskId,
+			}
+			return {
+				...prev,
+
+				tasks: [newTask, ...prev.tasks],
+			}
+		})
+	}
+
+	function handleDeleteTask(id) {
+		setProjectState(prev => ({
+			...prev,
+
+			tasks: prev.tasks.filter(task => task.id !== id),
 		}))
 	}
 

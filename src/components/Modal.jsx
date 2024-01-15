@@ -12,13 +12,18 @@ const Modal = forwardRef(function Modal({ children, buttonCaption }, ref) {
 			},
 		}
 	})
+
+	const closeHandler = e => {
+		e.preventDefault()
+		dialog.current.close()
+	}
 	return createPortal(
 		<dialog
 			ref={dialog}
 			className='backdrop:bg-stone-900/90 p-4 rounded-md shadow-md'>
 			{children}
 			<form action='dialog' className='mt-4 text-right'>
-				<Button>{buttonCaption}</Button>
+				<Button onClick={e => closeHandler(e)}>{buttonCaption}</Button>
 			</form>
 		</dialog>,
 		document.getElementById("modal-root")
